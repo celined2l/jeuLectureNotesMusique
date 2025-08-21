@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 
 public static class Global
@@ -29,14 +30,18 @@ public static class Global
                                                     "Do4", "Re4", "Mi4", "Fa4", "Sol4", "La4", "Si4" };
     
 
+    public static List<int> exerciceToutes = new List<int>() {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    public static List<int> exercice1 = new List<int>() { 2, 4, 6 };
+    public static List<int> exerciceEnCours;
+
 
     // public string[] exo_1_sol = new string[] { "Mi", "Sol", "Si" };
     // public string[] exo_1_ut = new string[] { "Fa", "La", "Do" };
     // public string[] exo_1_fa = new string[] { "Sol", "Mi", "La" };
-    
+
     // public string[] exo_ 1_sol = new string[] { "Mi", "Sol", "Si" };
     // public string[] exo_1_ut = new string[] { "Fa", "La", "Do" };
     // public string[] exo_1_fa = new string[] { "Sol", "Mi", "La"};
 
-    
+
 }

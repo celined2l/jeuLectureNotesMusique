@@ -13,12 +13,12 @@ public class ClefManager : MonoBehaviour
     public static string[] notes;
 
 
-    public static List<int> exerciceToutes = new List<int>() {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    public static List<int> exercice1 = new List<int>() { 2, 4, 6 };
+       
 
     public void Start()
     {
 
+        // Récupération de la plage de notes en fonction de la clé choisie
         notes = new string[14];
         int position = 12;
         switch (currentClef)
@@ -29,13 +29,25 @@ public class ClefManager : MonoBehaviour
         }
         Array.Copy(Global.toutesLesNotes, position, notes, 0, 14);
 
-        for (int i = 0; i < notes.Length; i++)
-        {
-            print($"notes {i} = {notes[i]}");
-        }
+        // for (int i = 0; i < notes.Length; i++)
+        // {
+        //     print($"notes {i} = {notes[i]}");
+        // }
+
+        // Récupération de l'exercice en cours
+        Global.exerciceEnCours = Global.exercice1;
+
+        // Positionnement des boutons en fonction des notes comprises dans l'exercice
+        placerBoutons();
 
     }
 
+
+    private void placerBoutons()
+    {
+        // Compter combien on va avoir de bouton pour savoir où les placer
+        int nbBoutons = Global.exerciceEnCours.Count;
+    }
 
     public float GetNoteY(int index)
     {
