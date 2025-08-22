@@ -2,11 +2,11 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public enum ClefType { CleSol, CleFa, CleUt3 }
+
 
 public class ClefManager : MonoBehaviour
 {
-    public ClefType currentClef = ClefType.CleUt3;
+    
     public float baseY = 0f;
     public float stepY = 0.2f;
 
@@ -21,11 +21,11 @@ public class ClefManager : MonoBehaviour
         // Récupération de la plage de notes en fonction de la clé choisie
         notes = new string[14];
         int position = 12;
-        switch (currentClef)
+        switch (Global.currentClef)
         {
-            case ClefType.CleFa: position = 0; break;
-            case ClefType.CleSol: position = 12; break;
-            case ClefType.CleUt3: position = 6; break;
+            case Global.ClefType.CleFa: position = 0; break;
+            case Global.ClefType.CleSol: position = 12; break;
+            case Global.ClefType.CleUt3: position = 6; break;
         }
         Array.Copy(Global.toutesLesNotes, position, notes, 0, 14);
 
@@ -87,18 +87,18 @@ public class ClefManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentClef = ClefType.CleSol;
+            Global.currentClef = Global.ClefType.CleSol;
             print("Clé : Sol");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            currentClef = ClefType.CleFa;
+            Global.currentClef = Global.ClefType.CleFa;
             print("Clé : Fa");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            currentClef = ClefType.CleUt3;
+            Global.currentClef = Global.ClefType.CleUt3;
             print("Clé : Ut3");
         }
     }

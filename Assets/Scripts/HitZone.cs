@@ -25,12 +25,12 @@ public class HitZone : MonoBehaviour
     {
         if (other.CompareTag("Note"))
         {
+            audioSource.clip = metronomeClick;
+            audioSource.PlayOneShot(metronomeClick);
+
             currentNoteCollider = other;
             var nc = other.GetComponent<NoteController>();
             currentNoteName = nc != null ? nc.noteName : string.Empty;
-
-            //audioSource.clip = metronomeClick;
-            audioSource.PlayOneShot(metronomeClick);
 
 print("currentNoteName : " + currentNoteName);
         }

@@ -5,14 +5,17 @@ using System.Collections.Generic;
 public static class Global
 {
 
+    // Gestion des clés
+    public enum ClefType { CleSol, CleFa, CleUt3 } 
+    public static ClefType currentClef = ClefType.CleSol;
 
     // Tempo
     public static float bpm = 50f;
 
-    // Y où on décide de détruire la note car elle n'est plus utile
+    // position Y où on décide de détruire la note car elle n'est plus utile
     public static float despawnY = -5f;
 
-    // X où on décide que c'est raté 
+    // position X où on décide que c'est raté 
     public static float rateX = -1f;
 
 
@@ -21,6 +24,9 @@ public static class Global
     public static int perfectBonus = 2;
     public static float perfectWindowFraction = 0.25f;
 
+    // Gestion du mode d'exercice
+    public enum ModeExercice { ligne, interligne, mixte }
+    public static ModeExercice currentModeExercice = ModeExercice.ligne ;
 
     // Gestion des exercices de notes
     //private string[] notes = new string[] { "Do", "Re", "Mi", "Fa", "Sol", "La", "Si" };
@@ -30,7 +36,8 @@ public static class Global
                                                     "Do4", "Re4", "Mi4", "Fa4", "Sol4", "La4", "Si4" };
     
 
-    public static List<int> exerciceToutes = new List<int>() {0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    // Liste des index des notes concerné
+    public static List<int> exerciceToutes = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
     public static List<int> exercice1 = new List<int>() { 2, 4, 6 };
     public static List<int> exerciceEnCours;
 
