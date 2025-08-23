@@ -72,7 +72,7 @@ public class NoteSpawner : MonoBehaviour
         mover.noteName = noteName;
         mover.inputManager = this.inputManager;
 
-        print($"Global.score = {Global.score}");
+//        print($"Global.score = {Global.score}");
 
     }
 

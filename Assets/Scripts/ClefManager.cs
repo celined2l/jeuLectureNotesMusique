@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 
@@ -12,7 +13,13 @@ public class ClefManager : MonoBehaviour
 
     public static string[] notes;
 
-
+    public Button boutonDo;
+    public Button boutonRe;
+    public Button boutonMi;
+    public Button boutonFa;
+    public Button boutonSol;
+    public Button boutonLa;
+    public Button boutonSi;
        
 
     public void Start()
@@ -47,6 +54,11 @@ public class ClefManager : MonoBehaviour
     {
         // Compter combien on va avoir de bouton pour savoir où les placer
         int nbBoutons = Global.exerciceEnCours.Count;
+
+        //print("boutonDo x = " + boutonDo.transform.width);
+        // boutonDo.transform.localPosition = new Vector3(0, 0, 0);
+
+
     }
 
     public float GetNoteY(int index)
@@ -85,21 +97,21 @@ public class ClefManager : MonoBehaviour
  
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Global.currentClef = Global.ClefType.CleSol;
-            print("Clé : Sol");
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     Global.currentClef = Global.ClefType.CleSol;
+        //     print("Clé : Sol");
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Global.currentClef = Global.ClefType.CleFa;
-            print("Clé : Fa");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Global.currentClef = Global.ClefType.CleUt3;
-            print("Clé : Ut3");
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha2))
+        // {
+        //     Global.currentClef = Global.ClefType.CleFa;
+        //     print("Clé : Fa");
+        // }
+        // if (Input.GetKeyDown(KeyCode.Alpha3))
+        // {
+        //     Global.currentClef = Global.ClefType.CleUt3;
+        //     print("Clé : Ut3");
+        // }
     }
 }

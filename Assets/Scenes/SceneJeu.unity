@@ -1648,7 +1648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -723, y: -918}
+  m_AnchoredPosition: {x: -709, y: -951}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933794671
@@ -1872,7 +1872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.2598877, y: 302.6061}
+  m_AnchoredPosition: {x: -6.2597656, y: 302.60608}
   m_SizeDelta: {x: 4.5201, y: -596.8324}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014469104
@@ -3244,9 +3244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39417bc355826a7b970254990735bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentClef: 0
   baseY: 0
   stepY: 0.2
+  boutonDo: {fileID: 933794671}
+  boutonRe: {fileID: 1034661119}
+  boutonMi: {fileID: 113083218}
+  boutonFa: {fileID: 822751233}
+  boutonSol: {fileID: 889997493}
+  boutonLa: {fileID: 1687177606}
+  boutonSi: {fileID: 46088582}
 --- !u!4 &1929213168
 Transform:
   m_ObjectHideFlags: 0

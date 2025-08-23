@@ -72,6 +72,8 @@ public class InputManager : MonoBehaviour
         if (feedbackAudio && missSfx) feedbackAudio.PlayOneShot(missSfx);
     }
 
+    
+
     private void UpdateScoreUI()
     {
         scoreText.text = $"Score: {Global.score}";

@@ -64,8 +64,8 @@ private void Awake()
             return;
         }
 
-        PlayerPrefs.SetInt("Clef", clefDropdown.value);
-        PlayerPrefs.SetInt("Tempo", Mathf.RoundToInt(tempoSlider.value));
+        // PlayerPrefs.SetInt("Clef", clefDropdown.value);
+        // PlayerPrefs.SetInt("Tempo", Mathf.RoundToInt(tempoSlider.value));
         SceneManager.LoadScene("SceneJeu");
     }
 }

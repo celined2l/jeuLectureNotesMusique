@@ -51,10 +51,10 @@ public class TempoManager : MonoBehaviour
     private void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            SetTempo(Global.bpm + 5f);
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            SetTempo(Global.bpm - 5f);
+        // if (Input.GetKeyDown(KeyCode.UpArrow))
+        //     SetTempo(Global.bpm + 5f);
+        // if (Input.GetKeyDown(KeyCode.DownArrow))
+        //     SetTempo(Global.bpm - 5f);
 
         // calcul du temps musical basé sur l'horloge audio
         songPosition = (float)(AudioSettings.dspTime - dspSongTime);
