@@ -6,6 +6,7 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     public TMP_Dropdown clefDropdown;
+    public TMP_Dropdown exerciceDropdown;
     public Slider tempoSlider;
     public Text tempoValueText;
 
@@ -17,6 +18,14 @@ private void Awake()
             foreach (var d in FindObjectsOfType<TMP_Dropdown>())
             {
                 if (d.name.Contains("Clef")) clefDropdown = d;
+            }
+        }
+
+        if (exerciceDropdown == null)
+        {
+            foreach (var e in FindObjectsOfType<TMP_Dropdown>())
+            {
+                if (e.name.Contains("Exercice")) exerciceDropdown = e;
             }
         }
 
@@ -58,9 +67,9 @@ private void Awake()
     // Cette méthode doit être reliée au bouton "Valider"
     public void surClick()
     {
-        if (clefDropdown == null || tempoSlider == null)
+        if (clefDropdown == null || tempoSlider == null || exerciceDropdown == null)
         {
-            Debug.LogError("MenuManager: références manquantes (clefDropdown ou tempoSlider).");
+            Debug.LogError("MenuManager: références manquantes (clefDropdown, exerciceDropdown ou tempoSlider).");
             return;
         }
 
