@@ -34,6 +34,8 @@ public static class Global
                                                     "Do2", "Re2", "Mi2", "Fa2", "Sol2", "La2", "Si2",
                                                     "Do3", "Re3", "Mi3", "Fa3", "Sol3", "La3", "Si3",
                                                     "Do4", "Re4", "Mi4", "Fa4", "Sol4", "La4", "Si4" };
+
+    public static string[] notesCleEnCours;
     
 
     // Liste des index des notes concerné

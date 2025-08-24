@@ -51,7 +51,7 @@ public class NoteSpawner : MonoBehaviour
         // Tirage de la note dans la liste de celles comprises dans l'exercice
         int index = Random.Range(0, Global.exercice1.Count);
 
-        string noteName = ClefManager.notes[Global.exercice1[index]];
+        string noteName = Global.notesCleEnCours[Global.exercice1[index]];
 
         // Calcul du Y selon la clé
         ClefManager clefManager = FindObjectsByType<ClefManager>(FindObjectsSortMode.None)[0];
