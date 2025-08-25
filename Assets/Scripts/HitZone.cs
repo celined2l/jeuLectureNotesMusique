@@ -30,9 +30,9 @@ public class HitZone : MonoBehaviour
 
             currentNoteCollider = other;
             var nc = other.GetComponent<NoteController>();
-            currentNoteName = nc != null ? nc.noteName : string.Empty;
+            currentNoteName = nc != null ? nc.noteName.Substring(0, nc.noteName.Length - 1) : string.Empty;
 
-print("currentNoteName : " + currentNoteName);
+            print("currentNoteName : " + currentNoteName);
         }
     }
 

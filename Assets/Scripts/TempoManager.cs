@@ -44,32 +44,37 @@ public class TempoManager : MonoBehaviour
 
     private void UpdateLabel()
     {
-        if (bpmLabel != null)
-            bpmLabel.text = $"BPM: {Mathf.RoundToInt(Global.bpm)}";
+        bpmLabel.text = $"BPM: {Mathf.RoundToInt(Global.bpm)}";
     }
 
     private void Update()
     {
-        
-        // if (Input.GetKeyDown(KeyCode.UpArrow))
-        //     SetTempo(Global.bpm + 5f);
-        // if (Input.GetKeyDown(KeyCode.DownArrow))
-        //     SetTempo(Global.bpm - 5f);
 
-        // calcul du temps musical basé sur l'horloge audio
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime);
-        songPositionInBeats = songPosition / secPerBeat;
-
-        if (AudioSettings.dspTime >= nextTickDspTime - 0.001f)
+        if (!Global.pause)
         {
-            //PlayScheduledTick(nextTickDspTime);
+            // calcul du temps musical basé sur l'horloge audio
+            songPosition = (float)(AudioSettings.dspTime - dspSongTime);
+            songPositionInBeats = songPosition / secPerBeat;
 
-            // 🔔 Appeler l’événement
-            OnBeat?.Invoke(beatCount);
+            if (AudioSettings.dspTime >= nextTickDspTime - 0.001f)
+            {
+                //PlayScheduledTick(nextTickDspTime);
 
-            beatCount++;
-            nextTickDspTime += secPerBeat;
+                // 🔔 Appeler l’événement
+                OnBeat?.Invoke(beatCount);
+
+                beatCount++;
+                nextTickDspTime += secPerBeat;
+            }
         }
+    }
+
+    public void Pause()
+    {
+        if (Global.pause)
+            Global.pause = false;
+        else
+            Global.pause = true;
     }
 
     void PlayScheduledTick(double dspTime)

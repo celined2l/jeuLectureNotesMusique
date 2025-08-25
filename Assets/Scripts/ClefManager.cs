@@ -22,7 +22,11 @@ public class ClefManager : MonoBehaviour
     public Button boutonSol;
     public Button boutonLa;
     public Button boutonSi;
-       
+
+    public SpriteRenderer cleSol;
+    public SpriteRenderer cleFa;
+    public SpriteRenderer cleUt;
+
 
     public void Start()
     {
@@ -32,37 +36,32 @@ public class ClefManager : MonoBehaviour
         int position = 12;
         switch (Global.currentClef)
         {
-            case Global.ClefType.CleFa: position = 0; break;
-            case Global.ClefType.CleSol: position = 12; break;
-            case Global.ClefType.CleUt3: position = 6; break;
+            case Global.ClefType.CleFa: { position = 0; cleFa.enabled = true; break; }
+            case Global.ClefType.CleSol: { position = 12; cleSol.enabled = true; break; }
+            case Global.ClefType.CleUt3: { } position = 6; cleUt.enabled = true; break;
         }
         Array.Copy(Global.toutesLesNotes, position, Global.notesCleEnCours, 0, 14);
 
-        // for (int i = 0; i < Global.notesCleEnCours.Length; i++)
-        // {
-        //     print($"notes {i} = {Global.notesCleEnCours[i]}");
-        // }
+        string stringnotes = string.Join(", ", Global.notesCleEnCours);
+        print($"notes en cours = {stringnotes}");
 
-        // Récupération de l'exercice en cours
-        Global.exerciceEnCours = Global.exercice1;
 
-        // Positionnement des boutons en fonction des notes comprises dans l'exercice
-        placerBoutons();
-
+        
     }
 
 
-    private void placerBoutons()
+    public void placerBoutons()
     {
+        reinitialiserPositionBoutons();
         // Compter combien on va avoir de bouton pour savoir où les placer
-        int nbBoutons = Global.exerciceEnCours.Count;
+        int nbBoutons = Global.currentExercice.Count;
 
         // Largeur d'un bouton (on récupère juste le do, les autres sont identiques)
         RectTransform buttonRect = boutonDo.GetComponent<RectTransform>();
         float largeurBouton = buttonRect.rect.width;
   
         //  Espacement entre 2 boutons
-        int espacement = 20;
+        int espacement = 80;
 
         // Déterminer la position x de départ de la ligne de bouton
         float xDepart;
@@ -74,16 +73,10 @@ public class ClefManager : MonoBehaviour
         //xDepart = -120;
         float xDiffDepartsSuivants = espacement + largeurBouton;
 
-        print("nbBoutons % 2  = " + nbBoutons % 2 ) ;
-        print("xDepart = " + xDepart) ;
-        print("nbBoutons " + nbBoutons);
-        print("largeurBouton " + largeurBouton);
-        
-
         List<string> notes = new List<string>();;
-        for (int i = 0; i < Global.exerciceEnCours.Count; i++)
+        for (int i = 0; i < Global.currentExercice.Count; i++)
         {
-            string note = Global.notesCleEnCours[Global.exerciceEnCours[i]];
+            string note = Global.notesCleEnCours[Global.currentExercice[i]];
             note = note.Substring(0, note.Length - 1);
             notes.Add(note);
         }   
@@ -127,6 +120,18 @@ public class ClefManager : MonoBehaviour
 
     }
 
+    private void reinitialiserPositionBoutons()
+    {
+        int y = -800;
+        boutonDo.transform.localPosition = new Vector3(-750, y, 0);
+        boutonRe.transform.localPosition = new Vector3(-620, y, 0);
+        boutonMi.transform.localPosition = new Vector3(-490, y, 0);
+        boutonFa.transform.localPosition = new Vector3(-360, y, 0);
+        boutonSol.transform.localPosition = new Vector3(-230, y, 0);
+        boutonLa.transform.localPosition = new Vector3(-100, y, 0);
+        boutonSi.transform.localPosition = new Vector3(30 , y , 0);
+    }
+
     public float GetNoteY(int index)
     {
 
@@ -160,24 +165,5 @@ public class ClefManager : MonoBehaviour
         }
     }
 
- 
-    private void Update()
-    {
-        // if (Input.GetKeyDown(KeyCode.Alpha1))
-        // {
-        //     Global.currentClef = Global.ClefType.CleSol;
-        //     print("Clé : Sol");
-        // }
 
-        // if (Input.GetKeyDown(KeyCode.Alpha2))
-        // {
-        //     Global.currentClef = Global.ClefType.CleFa;
-        //     print("Clé : Fa");
-        // }
-        // if (Input.GetKeyDown(KeyCode.Alpha3))
-        // {
-        //     Global.currentClef = Global.ClefType.CleUt3;
-        //     print("Clé : Ut3");
-        // }
-    }
 }

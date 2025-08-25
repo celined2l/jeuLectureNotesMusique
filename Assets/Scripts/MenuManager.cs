@@ -10,48 +10,49 @@ public class MenuManager : MonoBehaviour
     public Slider tempoSlider;
     public Text tempoValueText;
 
-private void Awake()
-    {
-        // Si le dropdown n'est pas assigné, on va le chercher
-        if (clefDropdown == null)
-        {
-            foreach (var d in FindObjectsOfType<TMP_Dropdown>())
-            {
-                if (d.name.Contains("Clef")) clefDropdown = d;
-            }
-        }
+    // private void Awake()
+    // {
+    //     // Si le dropdown n'est pas assigné, on va le chercher
+    //     if (clefDropdown == null)
+    //     {
+    //         foreach (var d in FindObjectsOfType<TMP_Dropdown>())
+    //         {
+    //             if (d.name.Contains("Clef")) clefDropdown = d;
+    //         }
+    //     }
 
-        if (exerciceDropdown == null)
-        {
-            foreach (var e in FindObjectsOfType<TMP_Dropdown>())
-            {
-                if (e.name.Contains("Exercice")) exerciceDropdown = e;
-            }
-        }
+    //     if (exerciceDropdown == null)
+    //     {
+    //         foreach (var e in FindObjectsOfType<TMP_Dropdown>())
+    //         {
+    //             if (e.name.Contains("Exercice")) exerciceDropdown = e;
+    //         }
+    //     }
 
-        // Si le slider n'est pas assigné, on va le chercher
-        if (tempoSlider == null)
-        {
-            foreach (var s in FindObjectsOfType<Slider>())
-            {
-                if (s.name.Contains("Tempo")) tempoSlider = s;
-            }
-        }
+    //     // Si le slider n'est pas assigné, on va le chercher
+    //     if (tempoSlider == null)
+    //     {
+    //         foreach (var s in FindObjectsOfType<Slider>())
+    //         {
+    //             if (s.name.Contains("Tempo")) tempoSlider = s;
+    //         }
+    //     }
 
-        // Si le texte n'est pas assigné, on va le chercher
-        if (tempoValueText == null)
-        {
-            foreach (var t in FindObjectsOfType<Text>())
-            {
-                if (t.name.Contains("Tempo")) tempoValueText = t;
-            }
-        }
-    }
+    //     // Si le texte n'est pas assigné, on va le chercher
+    //     if (tempoValueText == null)
+    //     {
+    //         foreach (var t in FindObjectsOfType<Text>())
+    //         {
+    //             if (t.name.Contains("Tempo")) tempoValueText = t;
+    //         }
+    //     }
+    // }
 
     private void Start()
     {
-        if (tempoSlider != null)
-            tempoSlider.onValueChanged.AddListener(OnTempoChanged);
+        tempoSlider.onValueChanged.AddListener(OnTempoChanged);
+        clefDropdown.onValueChanged.AddListener(OnClefChanged);
+        exerciceDropdown.onValueChanged.AddListener(OnExerciceChanged);
 
         if (tempoValueText != null)
             tempoValueText.text = "Tempo: " + Mathf.RoundToInt(tempoSlider.value) + " BPM";
@@ -73,8 +74,28 @@ private void Awake()
             return;
         }
 
-        // PlayerPrefs.SetInt("Clef", clefDropdown.value);
-        // PlayerPrefs.SetInt("Tempo", Mathf.RoundToInt(tempoSlider.value));
         SceneManager.LoadScene("SceneJeu");
     }
+
+    private void OnClefChanged(int value)
+    {
+        switch (value)
+        {
+            case 0 : Global.currentClef = Global.ClefType.CleSol ; break ;
+            case 1 : Global.currentClef = Global.ClefType.CleFa ; break ;
+            case 2 : Global.currentClef = Global.ClefType.CleUt3 ; break ;
+        }
+    }
+
+
+private void OnExerciceChanged(int value)
+    {
+        switch (value)
+        {
+            case 0 : Global.currentModeExercice = Global.ModeExercice.ligne ; break ;
+            case 1 : Global.currentModeExercice = Global.ModeExercice.interligne ; break ;
+            case 2 : Global.currentModeExercice = Global.ModeExercice.mixte ; break ;
+        }
+    }
+
 }

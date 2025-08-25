@@ -1981,7 +1981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Tempo: 120 BPM'
+  m_Text: 'Tempo: 50 BPM'
 --- !u!222 &901372834
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2725,7 +2725,7 @@ MonoBehaviour:
   m_MinValue: 30
   m_MaxValue: 300
   m_WholeNumbers: 0
-  m_Value: 80
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3411,6 +3411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clefDropdown: {fileID: 746037662}
+  exerciceDropdown: {fileID: 1601282864}
   tempoSlider: {fileID: 1301135247}
   tempoValueText: {fileID: 901372833}
 --- !u!4 &1887764338

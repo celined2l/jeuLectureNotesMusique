@@ -1,17 +1,24 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using NUnit.Framework;
+using Unity.VisualScripting;
+
 
 public class NoteSpawner : MonoBehaviour
 {
     public TempoManager tempo;
     public InputManager inputManager;
     public GameObject notePrefab;
+    public GameObject notePrefabBarre;
+    public GameObject notePrefabDessus;
     // public Transform spawnPoint;
     public Transform hitZone;
-    //private string[] notes = new string[] { "Do", "Re", "Mi", "Fa", "Sol", "La", "Si" };
-    // public string[] notes = new string[14] ;
-          
+
+    public ClefManager clefManager;
+
+
     [Header("Rythme")]
     public int beatsAhead = 4;      // nb de battements d’avance
     public int spawnEvery = 1;      // une note tous les X battements
@@ -48,14 +55,18 @@ public class NoteSpawner : MonoBehaviour
 
     public void SpawnNote()
     {
-        // Tirage de la note dans la liste de celles comprises dans l'exercice
-        int index = Random.Range(0, Global.exercice1.Count);
+        // Gérer le changement d'exercice
+        gestionChangementExercice();
 
-        string noteName = Global.notesCleEnCours[Global.exercice1[index]];
+        // Tirage de la note dans la liste de celles comprises dans l'exercice
+        int index = UnityEngine.Random.Range(0, Global.currentExercice.Count);
+
+        print("index = " + index);
+        string noteName = Global.notesCleEnCours[Global.currentExercice[index]];
 
         // Calcul du Y selon la clé
-        ClefManager clefManager = FindObjectsByType<ClefManager>(FindObjectsSortMode.None)[0];
-        float y = clefManager.GetNoteY(Global.exercice1[index]);
+        //ClefManager clefManager = FindObjectsByType<ClefManager>(FindObjectsSortMode.None)[0];
+        float y = clefManager.GetNoteY(Global.currentExercice[index]);
 
         // Spawn à droite du hitZone pour que la note arrive pile au battement
         float distance = noteSpeed * (beatsAhead * tempo.secPerBeat);
@@ -64,7 +75,11 @@ public class NoteSpawner : MonoBehaviour
         //float spawnX = 12f;
 
         // Instantiation
-        GameObject note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
+        GameObject note;
+        // if (noteName == "Do")
+        //     note = Instantiate(notePrefabBarre, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
+        // else
+            note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
 
         var mover = note.GetComponent<NoteController>();
         if (mover == null) mover = note.AddComponent<NoteController>();
@@ -72,7 +87,73 @@ public class NoteSpawner : MonoBehaviour
         mover.noteName = noteName;
         mover.inputManager = this.inputManager;
 
-//        print($"Global.score = {Global.score}");
+ //       print($"Global.score / level = {Global.score} / level {Global.level}");
+
+    }
+
+    private void gestionChangementExercice()
+    {
+        // cas du début, initialisation
+        if (Global.currentExercice == null)
+        {
+            if (Global.currentModeExercice == Global.ModeExercice.ligne)
+                Global.currentExercice = Global.exercicesLigne[0];
+            else if (Global.currentModeExercice == Global.ModeExercice.interligne)
+                Global.currentExercice = Global.exercicesInterLigne[0];
+            else if (Global.currentModeExercice == Global.ModeExercice.mixte)
+                Global.currentExercice = Global.exercicesMixte[0];
+            clefManager.placerBoutons();
+        }
+
+        // Ensuite on change de niveau en fonction du score
+        int niveauTheorique = (int) math.floor(Global.score / Global.seuilLevel);
+        bool monter = false;
+
+        if (niveauTheorique > Global.level)
+            monter = true;
+        
+        // Ajustement du niveau
+        if (niveauTheorique != Global.level)
+            Global.level = niveauTheorique;
+
+        // On augmente ou diminue le niveau, et à défaut le tempo
+        if (Global.currentModeExercice == Global.ModeExercice.ligne)
+        {
+            if (niveauTheorique > Global.exercicesLigne.Count && monter)
+                Global.bpm += 10;
+            else if (niveauTheorique > Global.exercicesLigne.Count && !monter)
+                Global.bpm -= 10;
+            else
+                Global.currentExercice = Global.exercicesLigne[niveauTheorique];
+
+            clefManager.placerBoutons();
+        }
+        else if (Global.currentModeExercice == Global.ModeExercice.interligne)
+        {
+            if (niveauTheorique > Global.exercicesInterLigne.Count && monter)
+                Global.bpm += 10;
+            else if (niveauTheorique > Global.exercicesInterLigne.Count && !monter)
+                Global.bpm -= 10;
+            else
+                Global.currentExercice = Global.exercicesInterLigne[niveauTheorique];
+
+            clefManager.placerBoutons();
+        }
+        else if (Global.currentModeExercice == Global.ModeExercice.mixte)
+        {
+            if (niveauTheorique > Global.exercicesMixte.Count && monter)
+                Global.bpm += 10;
+            else if (niveauTheorique > Global.exercicesMixte.Count && !monter)
+                Global.bpm -= 10;
+            else
+                Global.currentExercice = Global.exercicesMixte[niveauTheorique];
+
+            clefManager.placerBoutons();
+        }
+    
+
+        string exo = string.Join(", ", Global.currentExercice) ;
+        print( $" score / level / niveauTheorique = {Global.score} /  {Global.level} / {niveauTheorique} ({exo})");
 
     }
 
