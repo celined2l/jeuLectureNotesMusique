@@ -51,25 +51,28 @@ public class NoteController : MonoBehaviour
 
     void Update()
     {
-        double elapsed = AudioSettings.dspTime - spawnDSPTime;
-        float x = startX - noteSpeed * (float)elapsed; // défilement droite → gauche
-                                                          
-        transform.position = new Vector3(x, transform.position.y, transform.position.z);
-
-        // Baisse du score quand la note est sortie de la hitzone
-        if (transform.position.x < Global.rateX && vivante)
+        if (!Global.pause)
         {
-            vivante = false;
-            inputManager.Miss();
-            
-            // Activer la gravité
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.gravityScale = 1;
-        }
-    
+            double elapsed = AudioSettings.dspTime - spawnDSPTime;
+            float x = startX - noteSpeed * (float)elapsed; // défilement droite → gauche
 
-        // Destruction de la note lorsqu'elle est partie ailleurs
-        if (transform.position.y < Global.despawnY) { Destroy(gameObject); }
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
+
+            // Baisse du score quand la note est sortie de la hitzone
+            if (transform.position.x < Global.rateX && vivante)
+            {
+                vivante = false;
+                inputManager.Miss();
+
+                // Activer la gravité
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.gravityScale = 1;
+            }
+
+
+            // Destruction de la note lorsqu'elle est partie ailleurs
+            if (transform.position.y < Global.despawnY) { Destroy(gameObject); }
+        }
     }
 
    
