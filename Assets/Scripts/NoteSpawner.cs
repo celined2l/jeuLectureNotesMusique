@@ -79,7 +79,7 @@ public class NoteSpawner : MonoBehaviour
         // if (noteName == "Do")
         //     note = Instantiate(notePrefabBarre, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
         // else
-            note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
+        note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
 
         var mover = note.GetComponent<NoteController>();
         if (mover == null) mover = note.AddComponent<NoteController>();
@@ -87,7 +87,8 @@ public class NoteSpawner : MonoBehaviour
         mover.noteName = noteName;
         mover.inputManager = this.inputManager;
 
- //       print($"Global.score / level = {Global.score} / level {Global.level}");
+        //print($"Global.score / level = {Global.score} / level {Global.level}");
+   
 
     }
 

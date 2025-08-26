@@ -49,32 +49,36 @@ public class TempoManager : MonoBehaviour
 
     private void Update()
     {
+        // calcul du temps musical basé sur l'horloge audio
+        songPosition = (float)(AudioSettings.dspTime - dspSongTime);
+        songPositionInBeats = songPosition / secPerBeat;
 
-        if (!Global.pause)
+        if (AudioSettings.dspTime >= nextTickDspTime - 0.001f)
         {
-            // calcul du temps musical basé sur l'horloge audio
-            songPosition = (float)(AudioSettings.dspTime - dspSongTime);
-            songPositionInBeats = songPosition / secPerBeat;
+            //PlayScheduledTick(nextTickDspTime);
 
-            if (AudioSettings.dspTime >= nextTickDspTime - 0.001f)
-            {
-                //PlayScheduledTick(nextTickDspTime);
+            // 🔔 Appeler l’événement
+            OnBeat?.Invoke(beatCount);
 
-                // 🔔 Appeler l’événement
-                OnBeat?.Invoke(beatCount);
-
-                beatCount++;
-                nextTickDspTime += secPerBeat;
-            }
+            beatCount++;
+            nextTickDspTime += secPerBeat;
         }
     }
 
     public void Pause(string donnees)
     {
         if (Global.pause)
+        {
             Global.pause = false;
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+        }
         else
+        {
             Global.pause = true;
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+        }
     }
 
     void PlayScheduledTick(double dspTime)

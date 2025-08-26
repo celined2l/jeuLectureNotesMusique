@@ -210,7 +210,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      solfege_fa 1_0: 7434633567354168861
+      solfege_fa 1_1: 8322484665189383310
+      solfege_fa 1_2: -5887683621756613327
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
