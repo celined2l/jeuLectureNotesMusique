@@ -69,7 +69,7 @@ public class TempoManager : MonoBehaviour
         }
     }
 
-    public void Pause()
+    public void Pause(string donnees)
     {
         if (Global.pause)
             Global.pause = false;

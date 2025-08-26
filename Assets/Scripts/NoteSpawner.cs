@@ -102,7 +102,7 @@ public class NoteSpawner : MonoBehaviour
                 Global.currentExercice = Global.exercicesInterLigne[0];
             else if (Global.currentModeExercice == Global.ModeExercice.mixte)
                 Global.currentExercice = Global.exercicesMixte[0];
-            clefManager.placerBoutons();
+            // clefManager.placerBoutons();
         }
 
         // Ensuite on change de niveau en fonction du score
@@ -126,7 +126,7 @@ public class NoteSpawner : MonoBehaviour
             else
                 Global.currentExercice = Global.exercicesLigne[niveauTheorique];
 
-            clefManager.placerBoutons();
+            // clefManager.placerBoutons();
         }
         else if (Global.currentModeExercice == Global.ModeExercice.interligne)
         {
@@ -137,7 +137,7 @@ public class NoteSpawner : MonoBehaviour
             else
                 Global.currentExercice = Global.exercicesInterLigne[niveauTheorique];
 
-            clefManager.placerBoutons();
+            // clefManager.placerBoutons();
         }
         else if (Global.currentModeExercice == Global.ModeExercice.mixte)
         {
@@ -148,7 +148,7 @@ public class NoteSpawner : MonoBehaviour
             else
                 Global.currentExercice = Global.exercicesMixte[niveauTheorique];
 
-            clefManager.placerBoutons();
+            // clefManager.placerBoutons();
         }
     
 
