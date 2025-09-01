@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         //forcer l'orientation en paysage
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Screen.orientation = ScreenOrientation.LandscapeRight;
         tempoSlider.onValueChanged.AddListener(OnTempoChanged);
         clefDropdown.onValueChanged.AddListener(OnClefChanged);
         exerciceDropdown.onValueChanged.AddListener(OnExerciceChanged);

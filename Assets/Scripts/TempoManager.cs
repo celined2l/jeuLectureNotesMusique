@@ -3,6 +3,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class TempoManager : MonoBehaviour
 {
     
@@ -15,6 +16,10 @@ public class TempoManager : MonoBehaviour
     public float secPerBeat;
 
     public Text bpmLabel;
+
+    public GameObject boutonPause;
+    public Image imagePause;
+    public Image imageLecture;
 
     private double dspSongTime;
     private double nextTickDspTime;
@@ -73,12 +78,17 @@ public class TempoManager : MonoBehaviour
             Global.pause = false;
             Time.timeScale = 1f;
             AudioListener.pause = false;
+            //changement de l'image
+            imagePause.enabled = true;
+            imageLecture.enabled = false;
         }
         else
         {
             Global.pause = true;
             Time.timeScale = 0f;
             AudioListener.pause = true;
+            imagePause.enabled = false;
+            imageLecture.enabled = true;
         }
     }
 
