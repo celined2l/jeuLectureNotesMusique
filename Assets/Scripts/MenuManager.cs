@@ -50,6 +50,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        //forcer l'orientation en paysage
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
         tempoSlider.onValueChanged.AddListener(OnTempoChanged);
         clefDropdown.onValueChanged.AddListener(OnClefChanged);
         exerciceDropdown.onValueChanged.AddListener(OnExerciceChanged);
@@ -101,7 +103,6 @@ public class MenuManager : MonoBehaviour
     // Cette méthode doit être reliée au bouton "Sortir"
     public void Quitter()
     {
-        print("je quitte");
         Application.Quit();
     }
 
