@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System;
 
 
 public static class Global
@@ -21,6 +22,7 @@ public static class Global
     // position X où on décide que c'est raté 
     public static float rateX = -1f;
 
+    // Pour savoir si on met une note posée ou barée (sous ou au dessus de la portée)
 
     // Gestion du score
     public static int score;

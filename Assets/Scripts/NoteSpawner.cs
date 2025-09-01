@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using NUnit.Framework;
 using Unity.VisualScripting;
+using NUnit.Framework.Api;
 
 
 public class NoteSpawner : MonoBehaviour
@@ -55,8 +56,7 @@ public class NoteSpawner : MonoBehaviour
         // Tirage de la note dans la liste de celles comprises dans l'exercice
         int index = UnityEngine.Random.Range(0, Global.currentExercice.Count);
 
-        print("index = " + index);
-        string noteName = Global.notesCleEnCours[Global.currentExercice[index]];
+            string noteName = Global.notesCleEnCours[Global.currentExercice[index]];
 
         // Calcul du Y selon la clé
         //ClefManager clefManager = FindObjectsByType<ClefManager>(FindObjectsSortMode.None)[0];
@@ -76,7 +76,15 @@ public class NoteSpawner : MonoBehaviour
         // if (noteName == "Do")
         //     note = Instantiate(notePrefabBarre, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
         // else
-        note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity);
+
+        switch (Global.currentExercice[index])
+        {
+            case 0: note = Instantiate(notePrefabBarre, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity); break;
+            case 12: note = Instantiate(notePrefabBarre, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity); break;
+            case 13: note = Instantiate(notePrefabDessus, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity); break;
+            default : note = Instantiate(notePrefab, new Vector3(spawnX, y, hitZone.position.z), Quaternion.identity); break;
+        }
+        
 
         var mover = note.GetComponent<NoteController>();
         if (mover == null) mover = note.AddComponent<NoteController>();
