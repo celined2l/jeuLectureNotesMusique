@@ -3626,7 +3626,7 @@ MonoBehaviour:
   inputManager: {fileID: 844550829}
   notePrefab: {fileID: 6005125526131884084, guid: a67fe66cf72d98f4a844b4c5c902993a, type: 3}
   notePrefabBarre: {fileID: 6005125526131884084, guid: f85efcbb30add8b73b733785c7dff526, type: 3}
-  notePrefabDessus: {fileID: 0}
+  notePrefabDessus: {fileID: 6005125526131884084, guid: 1ecf6f2a9444f9ae78409913924dc72b, type: 3}
   hitZone: {fileID: 1991914265}
   clefManager: {fileID: 1929213167}
   beatsAhead: 2
