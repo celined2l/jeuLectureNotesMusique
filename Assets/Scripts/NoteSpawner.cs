@@ -27,12 +27,6 @@ public class NoteSpawner : MonoBehaviour
     public float noteSpeed = 5f;    // unités par seconde (contrôle visuel de la vitesse)
 
 
-    private void Start()
-    {
-        //if (tempoManager == null) tempoManager = FindObjectOfType<TempoManager>();
-        //StartCoroutine(SpawnRoutine());
-    }
-
 
 
     void OnEnable()
@@ -69,8 +63,11 @@ public class NoteSpawner : MonoBehaviour
         float y = clefManager.GetNoteY(Global.currentExercice[index]);
 
         // Spawn à droite du hitZone pour que la note arrive pile au battement
-        float distance = noteSpeed * (beatsAhead * tempo.secPerBeat);
-        float spawnX = hitZone.position.x + distance;
+        // float distance = noteSpeed * (beatsAhead * tempo.secPerBeat);
+        // float spawnX = hitZone.position.x + distance;
+
+        float spawnX = 10;
+
         // j'y arrive pas de toute façon... alors on bouge pas le x
         //float spawnX = 12f;
 
@@ -90,6 +87,7 @@ public class NoteSpawner : MonoBehaviour
         //print($"Global.score / level = {Global.score} / level {Global.level}");
    
 
+
     }
 
     private void gestionChangementExercice()
@@ -107,55 +105,75 @@ public class NoteSpawner : MonoBehaviour
         }
 
         // Ensuite on change de niveau en fonction du score
-        int niveauTheorique = (int) math.floor(Global.score / Global.seuilLevel);
+        int niveauTheorique = (int)math.floor(Global.score / Global.seuilLevel);
+
+        bool changerNiveau = false;
+        if (niveauTheorique != Global.level)
+            changerNiveau = true;
+
+        
+
+        if (changerNiveau)
+        {
+
+            
+
+            int nbNiveauxMaxPourModeExercice = 0;
+            if (Global.currentModeExercice == Global.ModeExercice.ligne)
+                nbNiveauxMaxPourModeExercice = Global.exercicesLigne.Count;
+            else if (Global.currentModeExercice == Global.ModeExercice.interligne)
+                nbNiveauxMaxPourModeExercice = Global.exercicesInterLigne.Count;
+            else if (Global.currentModeExercice == Global.ModeExercice.mixte)
+                nbNiveauxMaxPourModeExercice = Global.exercicesMixte.Count;
+
+            ChangerNiveau(niveauTheorique, nbNiveauxMaxPourModeExercice);
+        }
+        
+
+        string exo = string.Join(", ", Global.currentExercice);
+        print($" score / level / niveauTheorique = {Global.score} /  {Global.level} / {niveauTheorique} ({exo})");
+
+    }
+
+    private void ChangerNiveau(int niveauTheorique, int nbNiveauxMaxPourModeExercice)
+    {
         bool monter = false;
 
         if (niveauTheorique > Global.level)
             monter = true;
-        
+
         // Ajustement du niveau
         if (niveauTheorique != Global.level)
             Global.level = niveauTheorique;
 
-        // On augmente ou diminue le niveau, et à défaut le tempo
-        if (Global.currentModeExercice == Global.ModeExercice.ligne)
-        {
-            if (niveauTheorique > Global.exercicesLigne.Count && monter)
-                Global.bpm += 10;
-            else if (niveauTheorique > Global.exercicesLigne.Count && !monter)
-                Global.bpm -= 10;
-            else
-                Global.currentExercice = Global.exercicesLigne[niveauTheorique];
-
-            // clefManager.placerBoutons();
-        }
+        // changement d'exercice ou augmentation du tempo si pas d'autres exos dispos
+        if (niveauTheorique > nbNiveauxMaxPourModeExercice && monter)
+            Global.bpm += 10;
+        else if (niveauTheorique > nbNiveauxMaxPourModeExercice && monter)
+            Global.bpm -= 10;
+        else if (Global.currentModeExercice == Global.ModeExercice.ligne)
+            Global.currentExercice = Global.exercicesLigne[niveauTheorique];
         else if (Global.currentModeExercice == Global.ModeExercice.interligne)
-        {
-            if (niveauTheorique > Global.exercicesInterLigne.Count && monter)
-                Global.bpm += 10;
-            else if (niveauTheorique > Global.exercicesInterLigne.Count && !monter)
-                Global.bpm -= 10;
-            else
-                Global.currentExercice = Global.exercicesInterLigne[niveauTheorique];
-
-            // clefManager.placerBoutons();
-        }
+            Global.currentExercice = Global.exercicesInterLigne[niveauTheorique];
         else if (Global.currentModeExercice == Global.ModeExercice.mixte)
+            Global.currentExercice = Global.exercicesMixte[niveauTheorique];
+
+
+        // Détruire les notes de l'exercice précédent
+        detruireNotes();
+
+            
+    }
+
+
+    private void detruireNotes()
+    {
+        GameObject[] notes = GameObject.FindGameObjectsWithTag("Note");
+
+        foreach (GameObject go in notes)
         {
-            if (niveauTheorique > Global.exercicesMixte.Count && monter)
-                Global.bpm += 10;
-            else if (niveauTheorique > Global.exercicesMixte.Count && !monter)
-                Global.bpm -= 10;
-            else
-                Global.currentExercice = Global.exercicesMixte[niveauTheorique];
-
-            // clefManager.placerBoutons();
+            Destroy(go);
         }
-    
-
-        string exo = string.Join(", ", Global.currentExercice) ;
-        print( $" score / level / niveauTheorique = {Global.score} /  {Global.level} / {niveauTheorique} ({exo})");
-
     }
 
 }

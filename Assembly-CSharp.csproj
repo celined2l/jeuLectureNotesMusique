@@ -57,6 +57,7 @@
     <Compile Include="Assets/Scripts/TempoUI.cs" />
     <Compile Include="Assets/Scripts/MenuManager.cs" />
     <Compile Include="Assets/Scripts/HitZone.cs" />
+    <Compile Include="Assets/Scripts/ScoreFeedBack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

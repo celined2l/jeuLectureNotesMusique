@@ -11,7 +11,10 @@ public class InputManager : MonoBehaviour
     public AudioClip missSfx;
     public TMP_Text scoreText;
     public TMP_Text niveauText;
-        
+
+
+    public GameObject feedbackPrefab;
+    public Transform feedbackParent;
 
     private void Start()
     {
@@ -46,7 +49,8 @@ public class InputManager : MonoBehaviour
             //if (dx <= hitZone.hitWindowHalfWidth * perfectWindowFraction) add += perfectBonus;
             Global.score += add;
             UpdateScoreUI();
-            if (feedbackAudio && correctSfx) feedbackAudio.PlayOneShot(correctSfx);
+            ShowScoreFeedback(1);
+            //if (feedbackAudio && correctSfx) feedbackAudio.PlayOneShot(correctSfx);
             GameObject.Destroy(col.gameObject);
         }
         else { Miss(); }
@@ -58,9 +62,10 @@ public class InputManager : MonoBehaviour
         {
             Global.score -= 1;
             UpdateScoreUI();
-        }    
-        
-        if (feedbackAudio && missSfx) feedbackAudio.PlayOneShot(missSfx);
+            ShowScoreFeedback(-1);
+        }
+
+        //if (feedbackAudio && missSfx) feedbackAudio.PlayOneShot(missSfx);
     }
 
 
@@ -69,5 +74,23 @@ public class InputManager : MonoBehaviour
     {
         scoreText.text = $"Score: {Global.score}";
         niveauText.text = $"Niveau: {Global.level}";
+      
+
+    }
+    
+
+
+    void ShowScoreFeedback(int value)
+    {
+        GameObject go = Instantiate(feedbackPrefab, feedbackParent);
+
+        // Position au centre ou personnalisée
+        go.transform.localPosition = new Vector2(230, -130);
+
+        var feedback = go.GetComponent<ScoreFeedback>();
+        feedback.Init(
+            (value > 0 ? "+" : "") + value.ToString(),
+            value > 0 ? Color.green : Color.red
+        );
     }
 }

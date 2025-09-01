@@ -46,7 +46,9 @@ public static class Global
 
     public static List<int> currentExercice;
     public static int level = 0;
-    public static int seuilLevel = 5;
+    public static int seuilLevel = 10 ;
+    public static int toleranceBaisseNiveau = 5;
+
 
     // Exercices sur les lignes
     public static List<int> exercice1 = new List<int>() { 2, 4, 6 };

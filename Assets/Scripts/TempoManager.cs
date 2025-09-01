@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TempoManager : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class TempoManager : MonoBehaviour
         }
     }
 
-    public void Pause(string donnees)
+    public void Pause(string donnee)
     {
         if (Global.pause)
         {
@@ -79,6 +80,11 @@ public class TempoManager : MonoBehaviour
             Time.timeScale = 0f;
             AudioListener.pause = true;
         }
+    }
+
+    public void RetourMenu(String donnee)
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 
     void PlayScheduledTick(double dspTime)
