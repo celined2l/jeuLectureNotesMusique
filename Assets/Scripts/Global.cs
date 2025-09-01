@@ -48,6 +48,7 @@ public static class Global
     public static int level = 0;
     public static int seuilLevel = 10 ;
     public static int toleranceBaisseNiveau = 5;
+    public static int compteurErreur = 0;
 
 
     // Exercices sur les lignes

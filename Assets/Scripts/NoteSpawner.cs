@@ -92,7 +92,7 @@ public class NoteSpawner : MonoBehaviour
 
     private void gestionChangementExercice()
     {
-        // cas du début, initialisation
+        // cas du début, initialisation (pas de current exercice)
         if (Global.currentExercice == null)
         {
             if (Global.currentModeExercice == Global.ModeExercice.ligne)
@@ -108,15 +108,17 @@ public class NoteSpawner : MonoBehaviour
         int niveauTheorique = (int)math.floor(Global.score / Global.seuilLevel);
 
         bool changerNiveau = false;
-        if (niveauTheorique != Global.level)
-            changerNiveau = true;
 
+        if (niveauTheorique > Global.level)
+            changerNiveau = true;
+        else if (niveauTheorique < Global.level && Global.compteurErreur > Global.toleranceBaisseNiveau)
+            changerNiveau = true;
         
 
         if (changerNiveau)
         {
 
-            
+
 
             int nbNiveauxMaxPourModeExercice = 0;
             if (Global.currentModeExercice == Global.ModeExercice.ligne)

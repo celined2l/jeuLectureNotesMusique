@@ -52,6 +52,7 @@ public class InputManager : MonoBehaviour
             ShowScoreFeedback(1);
             //if (feedbackAudio && correctSfx) feedbackAudio.PlayOneShot(correctSfx);
             GameObject.Destroy(col.gameObject);
+            Global.compteurErreur = 0;
         }
         else { Miss(); }
     }
@@ -63,6 +64,7 @@ public class InputManager : MonoBehaviour
             Global.score -= 1;
             UpdateScoreUI();
             ShowScoreFeedback(-1);
+            Global.compteurErreur++;
         }
 
         //if (feedbackAudio && missSfx) feedbackAudio.PlayOneShot(missSfx);
