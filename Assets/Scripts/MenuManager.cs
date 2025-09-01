@@ -81,21 +81,29 @@ public class MenuManager : MonoBehaviour
     {
         switch (value)
         {
-            case 0 : Global.currentClef = Global.ClefType.CleSol ; break ;
-            case 1 : Global.currentClef = Global.ClefType.CleFa ; break ;
-            case 2 : Global.currentClef = Global.ClefType.CleUt3 ; break ;
+            case 0: Global.currentClef = Global.ClefType.CleSol; break;
+            case 1: Global.currentClef = Global.ClefType.CleFa; break;
+            case 2: Global.currentClef = Global.ClefType.CleUt3; break;
         }
     }
 
 
-private void OnExerciceChanged(int value)
+    private void OnExerciceChanged(int value)
     {
         switch (value)
         {
-            case 0 : Global.currentModeExercice = Global.ModeExercice.ligne ; break ;
-            case 1 : Global.currentModeExercice = Global.ModeExercice.interligne ; break ;
-            case 2 : Global.currentModeExercice = Global.ModeExercice.mixte ; break ;
+            case 0: Global.currentModeExercice = Global.ModeExercice.ligne; break;
+            case 1: Global.currentModeExercice = Global.ModeExercice.interligne; break;
+            case 2: Global.currentModeExercice = Global.ModeExercice.mixte; break;
         }
     }
 
+    // Cette méthode doit être reliée au bouton "Sortir"
+    public void Quitter()
+    {
+        print("je quitte");
+        Application.Quit();
+    }
+
 }
+
