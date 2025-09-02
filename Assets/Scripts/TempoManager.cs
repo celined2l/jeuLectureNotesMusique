@@ -94,6 +94,9 @@ public class TempoManager : MonoBehaviour
 
     public void RetourMenu(String donnee)
     {
+        Global.score = 0 ;
+        Global.level = 0 ;
+        Global.currentExercice = null;
         SceneManager.LoadScene("MenuScene");
     }
 

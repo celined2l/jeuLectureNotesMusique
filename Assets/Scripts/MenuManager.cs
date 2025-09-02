@@ -10,48 +10,11 @@ public class MenuManager : MonoBehaviour
     public Slider tempoSlider;
     public Text tempoValueText;
 
-    // private void Awake()
-    // {
-    //     // Si le dropdown n'est pas assigné, on va le chercher
-    //     if (clefDropdown == null)
-    //     {
-    //         foreach (var d in FindObjectsOfType<TMP_Dropdown>())
-    //         {
-    //             if (d.name.Contains("Clef")) clefDropdown = d;
-    //         }
-    //     }
-
-    //     if (exerciceDropdown == null)
-    //     {
-    //         foreach (var e in FindObjectsOfType<TMP_Dropdown>())
-    //         {
-    //             if (e.name.Contains("Exercice")) exerciceDropdown = e;
-    //         }
-    //     }
-
-    //     // Si le slider n'est pas assigné, on va le chercher
-    //     if (tempoSlider == null)
-    //     {
-    //         foreach (var s in FindObjectsOfType<Slider>())
-    //         {
-    //             if (s.name.Contains("Tempo")) tempoSlider = s;
-    //         }
-    //     }
-
-    //     // Si le texte n'est pas assigné, on va le chercher
-    //     if (tempoValueText == null)
-    //     {
-    //         foreach (var t in FindObjectsOfType<Text>())
-    //         {
-    //             if (t.name.Contains("Tempo")) tempoValueText = t;
-    //         }
-    //     }
-    // }
 
     private void Start()
     {
         //forcer l'orientation en paysage
-        Screen.orientation = ScreenOrientation.LandscapeRight;
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
         tempoSlider.onValueChanged.AddListener(OnTempoChanged);
         clefDropdown.onValueChanged.AddListener(OnClefChanged);
         exerciceDropdown.onValueChanged.AddListener(OnExerciceChanged);

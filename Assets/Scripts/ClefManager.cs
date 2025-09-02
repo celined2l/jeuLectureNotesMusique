@@ -2,8 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System.Runtime.ExceptionServices;
-using Unity.VisualScripting;
 using Unity.Mathematics;
 
 
@@ -46,77 +44,76 @@ public class ClefManager : MonoBehaviour
         print($"notes en cours = {stringnotes}");
 
 
-        
     }
 
 
     public void placerBoutons()
     {
-        // reinitialiserPositionBoutons();
-        // // Compter combien on va avoir de bouton pour savoir où les placer
-        // int nbBoutons = Global.currentExercice.Count;
+        reinitialiserPositionBoutons();
+        // Compter combien on va avoir de bouton pour savoir où les placer
+        int nbBoutons = Global.currentExercice.Count;
 
-        // // Largeur d'un bouton (on récupère juste le do, les autres sont identiques)
-        // RectTransform buttonRect = boutonDo.GetComponent<RectTransform>();
-        // float largeurBouton = buttonRect.rect.width;
+        // Largeur d'un bouton (on récupère juste le do, les autres sont identiques)
+        RectTransform buttonRect = boutonDo.GetComponent<RectTransform>();
+        float largeurBouton = buttonRect.rect.width;
   
-        // //  Espacement entre 2 boutons
-        // int espacement = 80;
+        //  Espacement entre 2 boutons
+        int espacement = 80;
 
-        // // Déterminer la position x de départ de la ligne de bouton
-        // float xDepart;
-        // if (nbBoutons % 2 == 0)
-        //     xDepart = 0 - ((espacement + largeurBouton) / 2) - (espacement * (nbBoutons / 2 - 1)) - (largeurBouton * (nbBoutons / 2 - 1));
-        // else
-        //     xDepart = 0 - (math.floor(nbBoutons / 2) * espacement) - (largeurBouton *  math.floor(nbBoutons /2) );
+        // Déterminer la position x de départ de la ligne de bouton
+        float xDepart;
+        if (nbBoutons % 2 == 0)
+            xDepart = 0 - ((espacement + largeurBouton) / 2) - (espacement * (nbBoutons / 2 - 1)) - (largeurBouton * (nbBoutons / 2 - 1));
+        else
+            xDepart = 0 - (math.floor(nbBoutons / 2) * espacement) - (largeurBouton *  math.floor(nbBoutons /2) );
 
-        // //xDepart = -120;
-        // float xDiffDepartsSuivants = espacement + largeurBouton;
+        //xDepart = -120;
+        float xDiffDepartsSuivants = espacement + largeurBouton;
 
-        // List<string> notes = new List<string>();;
-        // for (int i = 0; i < Global.currentExercice.Count; i++)
-        // {
-        //     string note = Global.notesCleEnCours[Global.currentExercice[i]];
-        //     note = note.Substring(0, note.Length - 1);
-        //     notes.Add(note);
-        // }   
+        List<string> notes = new List<string>();;
+        for (int i = 0; i < Global.currentExercice.Count; i++)
+        {
+            string note = Global.notesCleEnCours[Global.currentExercice[i]];
+            note = note.Substring(0, note.Length - 1);
+            notes.Add(note);
+        }   
 
-        // int index = 0;
-        // if (notes.Contains("Do"))
-        // {
-        //     boutonDo.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("Re"))
-        // {
-        //     boutonRe.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("Mi"))
-        // {
-        //     boutonMi.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("Fa"))
-        // {
-        //     boutonFa.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("Sol"))
-        // {
-        //     boutonSol.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("La"))
-        // {
-        //     boutonLa.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
-        // if (notes.Contains("Si"))
-        // {
-        //     boutonSi.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
-        //     index++;
-        // }
+        int index = 0;
+        if (notes.Contains("Do"))
+        {
+            boutonDo.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("Re"))
+        {
+            boutonRe.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("Mi"))
+        {
+            boutonMi.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("Fa"))
+        {
+            boutonFa.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("Sol"))
+        {
+            boutonSol.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("La"))
+        {
+            boutonLa.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
+        if (notes.Contains("Si"))
+        {
+            boutonSi.transform.localPosition = new Vector3(xDepart + xDiffDepartsSuivants * index, 0, 0);
+            index++;
+        }
 
     }
 
@@ -130,6 +127,49 @@ public class ClefManager : MonoBehaviour
         boutonSol.transform.localPosition = new Vector3(-230, y, 0);
         boutonLa.transform.localPosition = new Vector3(-100, y, 0);
         boutonSi.transform.localPosition = new Vector3(30 , y , 0);
+    }
+
+    private void EteindreBoutons()
+    {
+        boutonDo.interactable = false;
+        boutonRe.interactable = false;
+        boutonMi.interactable = false;
+        boutonFa.interactable = false;
+        boutonSol.interactable = false;
+        boutonLa.interactable = false;
+        boutonSi.interactable = false;
+        
+    }
+
+       public void AllumerBoutons()
+    {
+        EteindreBoutons();
+        // Compter combien on va avoir de bouton pour savoir où les placer
+        int nbBoutons = Global.currentExercice.Count;
+
+        List<string> notes = new List<string>(); ;
+        for (int i = 0; i < Global.currentExercice.Count; i++)
+        {
+            string note = Global.notesCleEnCours[Global.currentExercice[i]];
+            note = note.Substring(0, note.Length - 1);
+            notes.Add(note);
+        }
+
+        if (notes.Contains("Do"))
+            boutonDo.interactable = true;
+        if (notes.Contains("Re"))
+            boutonRe.interactable = true;
+        if (notes.Contains("Mi"))
+            boutonMi.interactable = true;
+        if (notes.Contains("Fa"))
+            boutonFa.interactable = true;
+        if (notes.Contains("Sol"))
+            boutonSol.interactable = true;
+        if (notes.Contains("La"))
+            boutonLa.interactable = true;
+        if (notes.Contains("Si"))
+            boutonSi.interactable = true;
+
     }
 
     public float GetNoteY(int index)

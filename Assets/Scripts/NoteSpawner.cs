@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using NUnit.Framework.Api;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class NoteSpawner : MonoBehaviour
@@ -18,6 +19,7 @@ public class NoteSpawner : MonoBehaviour
     public Transform hitZone;
 
     public ClefManager clefManager;
+    public PopUpInfos popUpInfos;
 
 
     [Header("Rythme")]
@@ -109,7 +111,8 @@ public class NoteSpawner : MonoBehaviour
                 Global.currentExercice = Global.exercicesInterLigne[0];
             else if (Global.currentModeExercice == Global.ModeExercice.mixte)
                 Global.currentExercice = Global.exercicesMixte[0];
-            // clefManager.placerBoutons();
+            clefManager.AllumerBoutons();
+            popUpInfos.AfficherPopup ($"!! Niveau de départ !! (Tempo : {Global.bpm})");
         }
 
         // Ensuite on change de niveau en fonction du score
@@ -125,10 +128,7 @@ public class NoteSpawner : MonoBehaviour
 
         if (changerNiveau)
         {
-
-
-
-            int nbNiveauxMaxPourModeExercice = 0;
+           int nbNiveauxMaxPourModeExercice = 0;
             if (Global.currentModeExercice == Global.ModeExercice.ligne)
                 nbNiveauxMaxPourModeExercice = Global.exercicesLigne.Count;
             else if (Global.currentModeExercice == Global.ModeExercice.interligne)
@@ -141,7 +141,7 @@ public class NoteSpawner : MonoBehaviour
         
 
         string exo = string.Join(", ", Global.currentExercice);
-        print($" score / level / niveauTheorique = {Global.score} /  {Global.level} / {niveauTheorique} ({exo})");
+        //print($" score / level / niveauTheorique = {Global.score} /  {Global.level} / {niveauTheorique} ({exo})");
 
     }
 
@@ -156,11 +156,18 @@ public class NoteSpawner : MonoBehaviour
         if (niveauTheorique != Global.level)
             Global.level = niveauTheorique;
 
+        // Si niveau inférieur on redescend le score au début du niveai théroique précédent
+        if (!monter)
+        {
+            Global.score = Global.seuilLevel * niveauTheorique;
+            inputManager.UpdateScoreUI();
+        }   
+
         // changement d'exercice ou augmentation du tempo si pas d'autres exos dispos
         if (niveauTheorique > nbNiveauxMaxPourModeExercice && monter)
-            Global.bpm += 10;
-        else if (niveauTheorique > nbNiveauxMaxPourModeExercice && monter)
-            Global.bpm -= 10;
+            Global.bpm += Global.seuilTempo;
+        else if (niveauTheorique > nbNiveauxMaxPourModeExercice && !monter)
+            Global.bpm -= Global.seuilTempo;
         else if (Global.currentModeExercice == Global.ModeExercice.ligne)
             Global.currentExercice = Global.exercicesLigne[niveauTheorique];
         else if (Global.currentModeExercice == Global.ModeExercice.interligne)
@@ -168,10 +175,11 @@ public class NoteSpawner : MonoBehaviour
         else if (Global.currentModeExercice == Global.ModeExercice.mixte)
             Global.currentExercice = Global.exercicesMixte[niveauTheorique];
 
-
         // Détruire les notes de l'exercice précédent
         detruireNotes();
 
+        clefManager.AllumerBoutons();
+        popUpInfos.AfficherPopup (monter ? $"Niveau supérieur... (Tempo : {Global.bpm}" : $"Niveau inférieur... (Tempo : {Global.bpm})");
             
     }
 

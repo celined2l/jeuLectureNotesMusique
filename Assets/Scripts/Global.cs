@@ -48,8 +48,9 @@ public static class Global
 
     public static List<int> currentExercice;
     public static int level = 0;
-    public static int seuilLevel = 10 ;
-    public static int toleranceBaisseNiveau = 5;
+    public static int seuilLevel = 50 ;
+    public static int toleranceBaisseNiveau = 15;
+    public static int seuilTempo = 30;
     public static int compteurErreur = 0;
 
 

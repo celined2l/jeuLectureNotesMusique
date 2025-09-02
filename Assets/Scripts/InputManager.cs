@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class InputManager : MonoBehaviour
@@ -72,10 +71,10 @@ public class InputManager : MonoBehaviour
 
 
 
-    private void UpdateScoreUI()
+    public void UpdateScoreUI()
     {
         scoreText.text = $"Score: {Global.score}";
-        niveauText.text = $"Niveau: {Global.level}";
+        niveauText.text = $"Niveau: {Global.level +1}";
       
 
     }

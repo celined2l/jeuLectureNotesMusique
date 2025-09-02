@@ -32,7 +32,7 @@ public class HitZone : MonoBehaviour
             var nc = other.GetComponent<NoteController>();
             currentNoteName = nc != null ? nc.noteName.Substring(0, nc.noteName.Length - 1) : string.Empty;
 
-            print("currentNoteName : " + currentNoteName);
+//            print("currentNoteName : " + currentNoteName);
         }
     }
 
